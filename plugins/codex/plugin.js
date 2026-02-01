@@ -46,6 +46,7 @@
     if (!auth.last_refresh) return true
     try {
       const lastMs = new Date(auth.last_refresh).getTime()
+      if (!Number.isFinite(lastMs)) return true
       return nowMs - lastMs > REFRESH_AGE_MS
     } catch {
       return true

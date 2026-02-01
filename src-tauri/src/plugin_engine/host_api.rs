@@ -204,8 +204,10 @@ fn inject_http<'js>(ctx: &Ctx<'js>, host: &Object<'js>) -> rquickjs::Result<()> 
     ctx.eval::<(), _>(
         r#"
         (function() {
-            var raw = __openusage_ctx ? null : null;
-            // Will be patched after __openusage_ctx is set
+            // Will be patched after __openusage_ctx is set.
+            if (typeof __openusage_ctx !== "undefined") {
+                void 0;
+            }
         })();
         "#
         .as_bytes(),
